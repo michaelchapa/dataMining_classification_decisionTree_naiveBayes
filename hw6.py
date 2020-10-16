@@ -71,6 +71,20 @@ def create_displayDecisionTree(data, target):
     plot_tree(clf, filled = True)
     plt.show()
     
+################ create_display_naiveBayes_classifier #####################
+# Purpose:
+#   ##
+# Parameters:
+#   ##
+#   ##
+# Returns:
+#   ##
+# Notes:
+#   None
+def create_display_naiveBayes_classifier(data):
+    return data
+
+
 
 def main():
     d = [['department', 'status', 'age', 'salary', 'count'], 
