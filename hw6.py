@@ -1,6 +1,9 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import cross_val_score
+from sklearn.tree import DecisionTreeClassifier, plot_tree
 
 ####################### expandData_byCount ################################
 # Purpose: 
@@ -49,6 +52,24 @@ def encodeCategorical(df):
     df = df.drop(columns = categoricalAttr)
     
     return df
+
+
+####################### create_displayDecisionTree #########################
+# Purpose:
+#   Creates a decision tree classifier, display the tree
+# Parameters:
+#   I       DataFrame       data
+#   I       String          target      Target Class attribute name
+# Returns:
+#   None
+# Notes:
+#   The target class should be a column name of the dataFrame
+def create_displayDecisionTree(data, target):
+    plt.figure(figsize=(15, 15)) 
+    clf = DecisionTreeClassifier(random_state = 0).fit( \
+                                 data.drop(columns = target), data[target])
+    plot_tree(clf, filled = True)
+    plt.show()
     
 
 def main():
@@ -72,6 +93,7 @@ def main():
     # Per assignment, remove 'Count' column from df2
     df2 = df2.drop(columns = 'count')
     
+    create_displayDecisionTree(df2, 'department_code')
     
 # Context the file is running in is __main__
 if __name__ == "__main__":
