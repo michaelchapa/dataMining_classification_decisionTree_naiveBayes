@@ -110,7 +110,7 @@ def preProcess_naiveBayes_classifier(data, columnToDrop):
 
 ####################### create_displayDecisionTree #########################
 # Purpose:
-#   Creates a decision tree classifier, display the tree
+#   Creates a decision tree classifier, displays the tree, prints a prediction
 # Parameters:
 #   I       DataFrame       data
 #   I       String          target      Target Class attribute name
@@ -125,29 +125,35 @@ def create_displayDecisionTree(data, target):
     plot_tree(clf, filled = True)
     plt.show()
     
+    if clf.predict([[3, 28, 50]]) == 0:
+        print('junior')
+    else:
+        print('senior')
+        
     return clf
     
 
-################ create_display_naiveBayes_classifier #####################
+################ create_test_naiveBayes_classifier #####################
 # Purpose:
-#   Trains a Classifier using Gaussian Naive Bayes algorithm 
+#   Trains a Classifier using Gaussian Naive Bayes algorithm, predicts a 
+#   target class based on an arbitrary tuple.
 # Parameters:
 #   I       DataFrame       data
 #   I       String          targetClass
 # Returns:
-#   GaussianNB
+#   GaussianNB classifier
 # Notes:
-#   None
-def create_display_naiveBayes_classifier(data, targetClass):
+#   yTrain is target class values and xTrain is independent attributes
+def create_test_naiveBayes_classifier(data, targetClass):
     gnb = GaussianNB()
     
-    X = data.drop(columns = targetClass)
-    y = data[targetClass]
+    xTrain = data.drop(columns = targetClass)
+    yTrain = data[targetClass]
     
-    X_train, X_test, y_train, y_test = \
-        train_test_split(X, y, test_size = 0.1, random_state = 0)
-        
-    return data
+    gnb.fit(xTrain, yTrain)
+    print(gnb.predict([[3, 28, 50]]))
+
+    return
 
 
 def main():
@@ -166,13 +172,17 @@ def main():
 
     df1 = pd.DataFrame(d[1:], columns = d[0])
     
-    #df2 = expandData_byCount(df1)
-    #df2 = encodeCategorical(df2, 'count', None)
+    df2 = expandData_byCount(df1)
+    df2 = encodeCategorical(df2, 'count', None)
+    
+    test = encodeCategorical(df1, 'count', None)
+    print(test)
         
-    #create_displayDecisionTree(df2, 'department_code')
+    create_displayDecisionTree(df2, 'department_code')
     
     df3 = preProcess_naiveBayes_classifier(df1, 'count')
-    create_display_naiveBayes_classifier(df3, 'status')
+    create_test_naiveBayes_classifier(df3, 'status')
+
     
 # Context the file is running in is __main__
 if __name__ == "__main__":
