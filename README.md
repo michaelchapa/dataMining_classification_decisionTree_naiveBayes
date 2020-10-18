@@ -1,3 +1,10 @@
+<h2>To see full output, visit:</h2>
+https://github.com/michaelchapa/dataMining_classification_decisionTree_naiveBayes/blob/develop/dataMining_classification_decisionTree_naiveBayes_examples.ipynb
+
+<h3>Raw Source:</h3>
+https://github.com/michaelchapa/dataMining_classification_decisionTree_naiveBayes/blob/develop/hw6.py
+
+<h4>Works Cited:</h4>
 Great resource on categorical encoding:
 pbpython.com/categorical-encoding.html
 
